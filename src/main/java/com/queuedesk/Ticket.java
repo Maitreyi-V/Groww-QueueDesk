@@ -2,8 +2,10 @@ package com.queuedesk;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Ticket {
+public abstract class Ticket implements Comparable<Ticket>{
     private int id;
     private String title;
     private String description;
@@ -14,6 +16,11 @@ public class Ticket {
 
     private static int nextID=1;
 
+    private String assignee;
+    private Set<String> tags= new HashSet<>();
+
+
+    //constructors
     public Ticket(String title,String description ,String requester,Priority priority){
         this.title=title;
         this.description= description;
@@ -27,12 +34,27 @@ public class Ticket {
         this(title,"No Description" , requester,Priority.LOW);
     }
 
+    //methods
     public static int totalCreated(){
         return nextID-1;
     }
     public double ageInHours(){
         return java.time.Duration.between(createdAt,LocalDateTime.now()).toHours();
     }
+
+    public void addTag(String tag){
+        tags.add(tag);
+    }
+
+    @Override
+    public int compareTo(Ticket other){
+        if(this.priority!=other.priority){
+            return other.priority.compareTo(this.priority);
+        }
+        return other.createdAt.compareTo(this.createdAt);
+    }
+    //abstract
+    public abstract double estimateEffortHours();
 
     //getters
     public int getID(){
@@ -63,6 +85,16 @@ public class Ticket {
         return createdAt;
     }
 
+    public String getAssignee(){
+        return assignee;
+    }
+
+    public Set<String> getTags(){
+        return tags;
+    }
+
+
+
 
     //setters
     public void setDescription(String description){
@@ -73,6 +105,9 @@ public class Ticket {
     }
     public void setPriority(Priority priority){
         this.priority=priority;
+    }
+    public void setAssignee(String assignee){
+        this.assignee=assignee;
     }
 
 }
