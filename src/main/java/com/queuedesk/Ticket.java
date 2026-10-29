@@ -65,7 +65,7 @@ public abstract class Ticket implements Comparable<Ticket>{
         if(this.priority!=other.priority){
             return other.priority.compareTo(this.priority);
         }
-        return other.createdAt.compareTo(this.createdAt);
+        return this.createdAt.compareTo(other.createdAt);
     }
 
     @Override
