@@ -14,13 +14,19 @@ public class Repository <T extends Ticket>{
         return Collections.unmodifiableList(items);
     }
 
-    public T findById(int id){
-        for(T item : items){
+    public T findById(int id) {
+        for ( T item : items){
             if(item.getID()==id){
                 return item;
             }
         }
         throw new TicketNotFoundException("Ticket with ID " + id + " not found");
+    }
+
+    public Optional<T> findByIdSafe(int id){
+        return items.stream()
+                .filter(item->item.getID()==id)
+                .findFirst();
     }
 
     public Map<String,List<T>> groupByAssignee(){

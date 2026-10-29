@@ -80,6 +80,19 @@ public class Main {
                 System.out.println(e.getMessage());
             }
 
+
+            repo.findByIdSafe(999).ifPresentOrElse(
+                    ticket -> System.out.println("Found: " + ticket),
+                    () -> System.out.println("No ticket with ID 999")
+            );
+
+            String title = repo.findByIdSafe(bug.getID())
+                    .map(Ticket::getTitle)
+                    .orElseThrow(()->new TicketNotFoundException("Ticket not found"));
+            System.out.println("Title :"+ title);
+
+
+
             try {
                 access.transitionTo(Status.CLOSED);
             } catch (InvalidStatusTransitionException e) {
