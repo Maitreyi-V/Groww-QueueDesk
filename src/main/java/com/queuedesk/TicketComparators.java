@@ -16,13 +16,5 @@ public class TicketComparators {
     };
 
     // 2.By status , then by Creation time
-    public static final Comparator<Ticket> BY_STATUS_THEN_AGE = (t1,t2)->{
-        int statusComparision=t1.getStatus().compareTo(t2.getStatus());
-        if(statusComparision!=0){
-            return statusComparision;
-        }
-        return t1.getCreatedAT().compareTo(t2.getCreatedAT());
-
-    };
-
+    public static final Comparator<Ticket> BY_STATUS_THEN_AGE = Comparator.comparing(Ticket::getStatus).thenComparing(Ticket::getCreatedAt);
 }

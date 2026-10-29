@@ -20,7 +20,7 @@ public class Repository <T extends Ticket>{
                 return item;
             }
         }
-        return null;
+        throw new TicketNotFoundException("Ticket with ID " + id + " not found");
     }
 
     public Map<String,List<T>> groupByAssignee(){

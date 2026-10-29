@@ -37,3 +37,12 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### compiler output
+*.class
+
+###txt files
+report.txt
+
+### learning
+AGENTS.md

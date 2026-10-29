@@ -1,7 +1,7 @@
 package com.queuedesk;
 
-import javax.swing.*;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +23,7 @@ public abstract class Ticket implements Comparable<Ticket>{
     //constructors
     public Ticket(String title,String description ,String requester,Priority priority){
         this.title=title;
-        this.description= description;
+        setDescription(description);
         this.requester=requester;
         this.priority=priority;
         this.createdAt=LocalDateTime.now();
@@ -46,6 +46,20 @@ public abstract class Ticket implements Comparable<Ticket>{
         tags.add(tag);
     }
 
+
+
+    public void transitionTo(Status newStatus){
+        // Rule 1: Cannot change status if already CLOSED
+        if(this.status==Status.CLOSED ){
+            throw new InvalidStatusTransitionException("Cannot change status of a closed/cancelled ticket");
+        }
+        // Rule 2: Cannot jump directly from OPEN to CLOSED
+        if(this.status==Status.OPEN && newStatus==Status.CLOSED){
+            throw new InvalidStatusTransitionException("Ticket must be IN_PROGRESS or RESOLVED before it can be CLOSED");
+        }
+        // Apply the valid transition
+        this.status=newStatus;
+    }
     @Override
     public int compareTo(Ticket other){
         if(this.priority!=other.priority){
@@ -53,6 +67,20 @@ public abstract class Ticket implements Comparable<Ticket>{
         }
         return other.createdAt.compareTo(this.createdAt);
     }
+
+    @Override
+    public String toString(){
+        return String.format("# %s | %s | %s | %s" ,id,title,priority,status);
+    }
+
+    public String shortDescription(int maxlength){
+        if(description.length()>maxlength){
+            return description.substring(0,maxlength-3)+"...";
+        }else{
+            return description;
+        }
+    }
+
     //abstract
     public abstract double estimateEffortHours();
 
@@ -77,11 +105,11 @@ public abstract class Ticket implements Comparable<Ticket>{
         return priority;
     }
 
-    public Status getStatus(){
+    public Status getStatus() {
         return status;
     }
 
-    public LocalDateTime getCreatedAT(){
+    public LocalDateTime getCreatedAt(){
         return createdAt;
     }
 
@@ -90,7 +118,7 @@ public abstract class Ticket implements Comparable<Ticket>{
     }
 
     public Set<String> getTags(){
-        return tags;
+        return Collections.unmodifiableSet(tags);
     }
 
 
@@ -98,10 +126,10 @@ public abstract class Ticket implements Comparable<Ticket>{
 
     //setters
     public void setDescription(String description){
-        this.description=description;
-    }
-    public void setStatus(Status status){
-        this.status=status;
+        if(description==null || description.isBlank() ){
+            throw new IllegalArgumentException("Decription cannot be blank");
+        }
+        this.description=description.trim();
     }
     public void setPriority(Priority priority){
         this.priority=priority;

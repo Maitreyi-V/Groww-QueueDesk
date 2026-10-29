@@ -1,0 +1,8 @@
+BUG|Database timeout|Connection drops under load|Alice|HIGH|CRITICAL|1. Run 100 queries 2. Observe timeout
+FEATURE|Dark mode|Add night theme|Bob|MEDIUM|12|Improves retention
+ACCESS|Prod DB access|Read-only for debugging|Charlie|LOW|Production Postgres|Read-Only
+BUG|Login loop on Safari|Users bounced back to login after submit|Dave|CRITICAL|HIGH|1. Open Safari 2. Sign in 3. Observe redirect
+FEATURE|Export to CSV|Let users download their ticket history|Alice|LOW|3|Requested by support team
+ACCESS|Grafana dashboard|Needs view access for on-call rotation|Erin|MEDIUM|Grafana|Viewer
+BUG|Stale cache on profile|Profile shows old avatar for an hour|Bob|MEDIUM|LOW|1. Change avatar 2. Reload
+FEATURE|Bulk close tickets|Select many tickets and close in one action|Erin|HIGH|27|Saves agents an hour a day

@@ -1,0 +1,2 @@
+BUG|Only four fields|Alice|HIGH
+FEATURE|Typo priority|Some description|Dave|URGANT|5|Because

@@ -51,6 +51,10 @@ public class BugTicket extends Ticket implements Escalatable{
         return escalationLevel;
     }
 
+    @Override
+    public String toString(){
+        return super.toString() +" | severity=" +severity;
+    }
 
     //getters
     public Severity getSeverity(){
