@@ -7,6 +7,9 @@ public class BugTicket extends Ticket implements Escalatable{
     private int escalationLevel;
     private boolean escalatedState;
 
+    //for jackson only
+    private BugTicket(){}
+
     //constructor
     public BugTicket(String title, String description,String requester, Priority priority, Severity severity, String stepsToReproduce){
         super(title,description,requester,priority);

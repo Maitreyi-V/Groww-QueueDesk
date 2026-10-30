@@ -4,6 +4,18 @@ public class FeatureRequestTicket extends Ticket{
     private int votes;
     private String businessJustification;
 
+    //getters
+    public int getVotes(){
+        return votes;
+    }
+
+    public String getBusinessJustification(){
+        return businessJustification;
+    }
+
+    //for jackson only
+    private FeatureRequestTicket(){}
+
     //constructor
     public FeatureRequestTicket(String title, String description,String requester, Priority priority,int votes,String businessJustification ){
         super(title, description, requester, priority);

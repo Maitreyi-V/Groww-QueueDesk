@@ -8,6 +8,19 @@ public class AccessRequestTicket extends Ticket implements Escalatable{
     private boolean escalatedState=false;
 
 
+    //getters
+
+    public String getSystemName(){
+        return systemName;
+    }
+
+    public String getAccessLevel(){
+        return accessLevel;
+    }
+
+    //for jackson only
+    private AccessRequestTicket(){}
+
     //constructor
     public AccessRequestTicket(String title, String description,String requester, Priority priority,String systemName,String accessLevel ){
         super(title, description, requester, priority);

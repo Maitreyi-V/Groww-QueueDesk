@@ -1,10 +1,23 @@
 package com.queuedesk;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include =JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value=BugTicket.class,name = "bug"),
+        @JsonSubTypes.Type(value=FeatureRequestTicket.class,name="feature"),
+        @JsonSubTypes.Type(value=AccessRequestTicket.class,name="access")
+})
 public abstract class Ticket implements Comparable<Ticket>{
     private int id;
     private String title;
@@ -19,6 +32,9 @@ public abstract class Ticket implements Comparable<Ticket>{
     private String assignee;
     private Set<String> tags= new HashSet<>();
 
+
+    //for Jackson only
+    protected Ticket(){}
 
     //constructors
     public Ticket(String title,String description ,String requester,Priority priority){
