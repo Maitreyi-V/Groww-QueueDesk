@@ -31,8 +31,12 @@ public class TicketJsonStore {
 
     public static List<Ticket> load(Path file) throws InvalidTicketDataException{
         try{
-            return MAPPER.readValue(file.toFile(), new TypeReference<List<Ticket>>() {
+            List<Ticket> tickets= MAPPER.readValue(file.toFile(), new TypeReference<List<Ticket>>() {
             });
+            for(Ticket ticket : tickets){
+                Ticket.ensureNextIdAfter(ticket.getID());
+            }
+            return tickets;
         }catch(IOException e){
             throw new InvalidTicketDataException("Could not load the tickets from the file",e);
         }

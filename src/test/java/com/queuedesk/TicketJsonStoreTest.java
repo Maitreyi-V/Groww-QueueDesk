@@ -3,12 +3,12 @@ package com.queuedesk;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TicketJsonStoreTest {
 
@@ -57,4 +57,27 @@ public class TicketJsonStoreTest {
 
         assertEquals(11.5,loaded.get(1).estimateEffortHours(),0.001);
     }
+
+    @Test
+    void load_movesIdCounterPastLoadedIds() throws Exception{
+        Path file = tempDir.resolve("high-id.json");
+        Files.writeString(file, """
+        [ {
+          "type" : "access",
+          "id" : 500,
+          "title" : "Old ticket"
+        } ]
+        """);
+
+        TicketJsonStore.load(file);
+
+        BugTicket created = new BugTicket(
+                "New", "Desc", "Alice",
+                Priority.LOW, Severity.LOW, "Steps"
+        );
+
+        assertTrue(created.getID()>500);
+
+    }
+
 }

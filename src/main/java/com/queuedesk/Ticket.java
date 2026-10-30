@@ -54,6 +54,11 @@ public abstract class Ticket implements Comparable<Ticket>{
     public static int totalCreated(){
         return nextID-1;
     }
+    static void ensureNextIdAfter(int loadId){
+        if(loadId>=nextID){
+            nextID=loadId+1;
+        }
+    }
     public double ageInHours(){
         return java.time.Duration.between(createdAt,LocalDateTime.now()).toHours();
     }
