@@ -1,6 +1,7 @@
 package com.queuedesk;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
@@ -100,13 +101,25 @@ public class Main {
             }
 
 
+//            try {
+//                List<Ticket> loaded = TicketFileLoader.load(Path.of("tickets.txt"));
+//                System.out.println("Loaded " + loaded.size() + " tickets");
+//                System.out.println(ReportGenerator.generate(loaded, 0));
+//                String report = ReportGenerator.generate(loaded, 0);
+//                ReportGenerator.writeToFile(report, Path.of("report.txt"));
+//            } catch (InvalidTicketDataException e) {
+//                System.out.println("Could not load tickets" + e.getMessage());
+//            }
+
             try {
-                List<Ticket> loaded = TicketFileLoader.load(Path.of("tickets.txt"));
-                System.out.println("Loaded " + loaded.size() + " tickets");
-                System.out.println(ReportGenerator.generate(loaded, 0));
-                String report = ReportGenerator.generate(loaded, 0);
-                ReportGenerator.writeToFile(report, Path.of("report.txt"));
-            } catch (InvalidTicketDataException e) {
+                Path jsonFile = Path.of("tickets.json");
+                if (!Files.exists(jsonFile)) {
+                    List<Ticket> old = TicketFileLoader.load(Path.of("tickets.txt"));
+                    TicketJsonStore.save(old, jsonFile);
+                    System.out.println("Migrated");
+                }
+                List<Ticket> loaded = TicketJsonStore.load(jsonFile);
+            }catch (InvalidTicketDataException e){
                 System.out.println("Could not load tickets" + e.getMessage());
             }
 
