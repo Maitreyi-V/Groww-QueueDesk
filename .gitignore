@@ -43,6 +43,7 @@ build/
 
 ###txt files
 report.txt
+report-bad.txt
 
 ### learning
 AGENTS.md
