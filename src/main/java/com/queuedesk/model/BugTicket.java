@@ -1,4 +1,4 @@
-package com.queuedesk;
+package com.queuedesk.model;
 
 public class BugTicket extends Ticket implements Escalatable{
     private Severity severity ;

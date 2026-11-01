@@ -1,4 +1,8 @@
-package com.queuedesk;
+package com.queuedesk.analytics;
+
+import com.queuedesk.model.Priority;
+import com.queuedesk.model.Status;
+import com.queuedesk.model.Ticket;
 
 import java.util.Comparator;
 import java.util.List;

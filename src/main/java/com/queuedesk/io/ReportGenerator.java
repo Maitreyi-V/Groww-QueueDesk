@@ -1,4 +1,8 @@
-package com.queuedesk;
+package com.queuedesk.io;
+
+import com.queuedesk.model.Priority;
+import com.queuedesk.model.Status;
+import com.queuedesk.model.Ticket;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

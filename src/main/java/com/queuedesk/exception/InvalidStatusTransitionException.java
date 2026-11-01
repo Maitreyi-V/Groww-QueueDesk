@@ -1,7 +1,7 @@
-package com.queuedesk;
+package com.queuedesk.exception;
 
 public class InvalidStatusTransitionException extends RuntimeException{
-    InvalidStatusTransitionException(String msg){
+    public InvalidStatusTransitionException(String msg){
         super(msg);
     }
 }

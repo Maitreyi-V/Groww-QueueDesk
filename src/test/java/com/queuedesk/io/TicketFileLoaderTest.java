@@ -1,4 +1,8 @@
-package com.queuedesk;
+package com.queuedesk.io;
+
+import com.queuedesk.exception.InvalidTicketDataException;
+import com.queuedesk.model.BugTicket;
+import com.queuedesk.model.Ticket;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.queuedesk;
+package com.queuedesk.model;
 
 public class FeatureRequestTicket extends Ticket{
     private int votes;

@@ -1,4 +1,7 @@
-package com.queuedesk;
+package com.queuedesk.io;
+
+import com.queuedesk.exception.InvalidTicketDataException;
+import com.queuedesk.model.Ticket;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

@@ -41,21 +41,29 @@ mvn test
 
 ## Project layout
 
-All code is in `src/main/java/com/queuedesk`.
+```
+src/main/java/com/queuedesk
+├── Main.java                       demo that runs everything
+├── model/                          the things in the app, and their rules
+│   ├── Ticket                      abstract base: shared fields, status rules, ordering
+│   ├── BugTicket, FeatureRequestTicket, AccessRequestTicket
+│   ├── Escalatable                 interface for tickets that can be escalated
+│   ├── Priority, Severity, Status  enums
+│   └── TicketComparators           ready-made sort orders
+├── exception/                      custom errors
+│   ├── InvalidStatusTransitionException
+│   ├── InvalidTicketDataException
+│   └── TicketNotFoundException
+├── repository/
+│   └── Repository<T>               stores tickets, finds by id, groups by assignee
+├── analytics/
+│   └── TicketAnalytics             stream-based statistics
+└── io/                             reading and writing files
+    ├── TicketFileLoader            reads the old pipe-delimited tickets.txt
+    ├── TicketJsonStore             saves and loads tickets as JSON
+    └── ReportGenerator             builds and writes the end-of-day report
+```
 
-| File | What it does |
-|---|---|
-| `Ticket` | Abstract base class: shared fields, status rules, ordering |
-| `BugTicket`, `FeatureRequestTicket`, `AccessRequestTicket` | The three ticket types |
-| `Escalatable` | Interface for tickets that can be escalated |
-| `Priority`, `Severity`, `Status` | Enums |
-| `Repository<T>` | Stores tickets, finds them by id, groups by assignee |
-| `TicketComparators` | Ready-made sort orders |
-| `TicketAnalytics` | Stream-based statistics |
-| `TicketFileLoader` | Reads the old pipe-delimited `tickets.txt` |
-| `TicketJsonStore` | Saves and loads tickets as JSON |
-| `ReportGenerator` | Builds and writes the end-of-day report |
-| `*Exception` | Custom errors for bad data, missing tickets and invalid status changes |
-| `Main` | Demo that runs everything |
+Tests mirror the same packages under `src/test/java/com/queuedesk`.
 
-Tests are in `src/test/java/com/queuedesk`.
+Data files in the project root: `tickets.txt` (old format), `tickets.json` (current format), `tickets-bad.txt` (invalid input used by a test).

@@ -1,4 +1,6 @@
-package com.queuedesk;
+package com.queuedesk.model;
+
+import com.queuedesk.exception.InvalidStatusTransitionException;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

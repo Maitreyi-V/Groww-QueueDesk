@@ -1,4 +1,6 @@
-package com.queuedesk;
+package com.queuedesk.model;
+
+import com.queuedesk.exception.InvalidStatusTransitionException;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -54,7 +56,7 @@ public abstract class Ticket implements Comparable<Ticket>{
     public static int totalCreated(){
         return nextID-1;
     }
-    static void ensureNextIdAfter(int loadId){
+    public static void ensureNextIdAfter(int loadId){
         if(loadId>=nextID){
             nextID=loadId+1;
         }

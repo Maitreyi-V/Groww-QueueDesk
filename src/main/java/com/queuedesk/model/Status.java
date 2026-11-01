@@ -1,4 +1,4 @@
-package com.queuedesk;
+package com.queuedesk.model;
 
 public enum Status {
     OPEN,

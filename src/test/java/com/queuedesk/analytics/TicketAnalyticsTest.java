@@ -1,4 +1,12 @@
-package com.queuedesk;
+package com.queuedesk.analytics;
+
+import com.queuedesk.model.AccessRequestTicket;
+import com.queuedesk.model.BugTicket;
+import com.queuedesk.model.FeatureRequestTicket;
+import com.queuedesk.model.Priority;
+import com.queuedesk.model.Severity;
+import com.queuedesk.model.Status;
+import com.queuedesk.model.Ticket;
 
 import org.junit.jupiter.api.Test;
 

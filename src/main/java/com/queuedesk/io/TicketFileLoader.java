@@ -1,4 +1,12 @@
-package com.queuedesk;
+package com.queuedesk.io;
+
+import com.queuedesk.exception.InvalidTicketDataException;
+import com.queuedesk.model.AccessRequestTicket;
+import com.queuedesk.model.BugTicket;
+import com.queuedesk.model.FeatureRequestTicket;
+import com.queuedesk.model.Priority;
+import com.queuedesk.model.Severity;
+import com.queuedesk.model.Ticket;
 
 import java.io.BufferedReader;
 import java.io.IOException;

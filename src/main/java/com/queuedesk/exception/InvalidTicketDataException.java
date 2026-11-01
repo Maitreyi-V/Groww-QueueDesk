@@ -1,4 +1,4 @@
-package com.queuedesk;
+package com.queuedesk.exception;
 
 public class InvalidTicketDataException extends Exception{
     public InvalidTicketDataException(String msg){
